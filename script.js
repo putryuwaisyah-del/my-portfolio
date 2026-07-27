@@ -739,7 +739,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const galleries = {
         fyp: {
-            files: buildNumbered("images/fyp_slides/", "slide-", 31),
+            files: buildNumbered("images/myfyp_slides/", "slide-", 31),
             img: "fypSlideImg", counter: "fypCounter", current: 0
         },
         econ: {
