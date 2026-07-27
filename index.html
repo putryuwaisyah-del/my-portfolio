@@ -2,62 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Puteri Uwaisyahtul Akashah - Portfolio</title>
+    <title>Putely - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&family=Poppins:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
+    <div class="bg-fixed"></div>
+    <div class="bg-dark-overlay"></div>
+
     <nav id="navbar">
-        <span class="logo">putely.dev</span>
+        <a href="#hero" class="logo" title="Back to top">Putely.Portfolio</a>
         <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#volunteering">Volunteering</a>
-            <a href="#vision">Vision Board</a>
-            <a href="#contact">Contact</a>
+            <a href="#about" data-i18n="nav_about">About</a>
+            <a href="#skills" data-i18n="nav_skills">Skills</a>
+            <a href="#education" data-i18n="nav_education">Education</a>
+            <a href="#licenses" data-i18n="nav_licenses">Licenses</a>
+            <a href="#experience" data-i18n="nav_experience">Experience</a>
+            <a href="#projects" data-i18n="nav_projects">Projects</a>
+            <a href="#volunteering" data-i18n="nav_volunteering">Volunteering</a>
+            <a href="#vision" data-i18n="nav_vision">Vision Board</a>
+            <a href="#contact" data-i18n="nav_contact">Contact</a>
+        </div>
+        <div class="nav-controls">
+            <div class="lang-switch" id="langSwitch">
+                <button class="lang-btn active" data-lang="en" title="English">EN</button>
+                <button class="lang-btn" data-lang="ms" title="Bahasa Melayu">MY</button>
+                <button class="lang-btn" data-lang="ja" title="日本語">JP</button>
+            </div>
+            <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">
+                <i class="fa-solid fa-moon theme-icon"></i>
+            </button>
         </div>
     </nav>
 
     <section id="hero">
-        <p class="hero-greeting">Hello, I'm</p>
+        <p class="hero-greeting" data-i18n="hero_greeting">Hello, I'm</p>
         <h1 class="hero-name">Puteri Uwaisyah </h1>
-        <p class="hero-tagline"> Aspiring full stack developer, curious about data and design.</p>
+        <p class="hero-tagline" data-i18n="hero_tagline"> Aspiring full stack developer, curious about data and design.</p>
         <div class="hero-buttons">
-            <a href="#vision" class="btn btn-filled">My Vision Board</a>
-            <a href="#contact" class="btn btn-outline">Contact me</a>
+            <a href="#projects" class="btn btn-filled" data-i18n="hero_btn_projects">My Projects</a>
+            <a href="#contact" class="btn btn-outline" data-i18n="hero_btn_contact">Contact me</a>
         </div>
     </section>
 
     <!-- ABOUT ME: Barbie-style popup -->
     <section id="about">
-        <h1>About me</h1>
-        <p class="about-intro">Click below for the full story - meow meow meow 🐱💖</p>
-        <button id="openAboutBtn" class="barbie-btn">💖 Get to know putely </button>
+        <h1 data-i18n="about_heading">About me</h1>
+        <p class="about-intro" data-i18n="about_intro">Click below to learn more about my background and journey.</p>
+        <button id="openAboutBtn" class="barbie-btn" data-i18n="about_btn"><i class="fa-solid fa-heart"></i> Learn More About Putely </button>
     </section>
 
     <div id="overlay" class="overlay">
         <div id="aboutModal" class="barbie-modal">
-            <span id="closeAboutBtn" class="close-btn">✕</span>
-            <p class="modal-title">✨ Hi, I'm Puteri Uwaisyahtul Akashah ✨</p>
+            <span id="closeAboutBtn" class="close-btn"><i class="fa-solid fa-xmark"></i></span>
+            <p class="modal-title" data-i18n="about_modal_title">Welcome to My Portfolio</p>
+
+            <div class="modal-avatar-wrap">
+                <div class="modal-avatar-glow"></div>
+                <img id="profileAvatar" src="images/profile_web.jpg" alt="Putely profile photo" class="modal-avatar zoomable" data-full="images/profile_web.jpg" title="Click to view full photo">
+                <span class="modal-avatar-hint"><i class="fa-solid fa-magnifying-glass"></i></span>
+            </div>
+
             <div id="modalText" class="modal-text"></div>
+
             <div class="tag-row">
-                <span class="tag">📊 Power BI</span>
-                <span class="tag">💻 AI Technology</span>
-                <span class="tag">🐱 Cat Mom</span>
-                <span class="tag">🏸 Badminton</span>
-                <span class="tag">🎮 Glory Rank MLBB</span>
-                <span class="tag">🎤 Singing</span>
+                <span class="tag" data-i18n="about_tag1"><i class="fa-solid fa-chart-column"></i> Power BI</span>
+                <span class="tag" data-i18n="about_tag2"><i class="fa-solid fa-microchip"></i> AI Technology</span>
+                <span class="tag" data-i18n="about_tag3"><i class="fa-solid fa-cat"></i> Cat Mom</span>
+                <span class="tag" data-i18n="about_tag4"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Badminton</span>
+                <span class="tag" data-i18n="about_tag5"><i class="fa-solid fa-gamepad"></i> Glory Rank MLBB</span>
+                <span class="tag" data-i18n="about_tag6"><i class="fa-solid fa-microphone"></i> Singing</span>
+            </div>
+
+            <!-- Favourite MLBB hero showcase -->
+            <div class="ml-hero-card">
+                <div class="ml-hero-shine"></div>
+                <div class="ml-hero-frame">
+                    <img src="images/kagura_web.jpg" alt="Kagura Mobile Legends fan art" class="ml-hero-img zoomable" data-full="images/kagura_web.jpg" title="Click to view full art">
+                </div>
+                <p class="ml-hero-caption" data-i18n="ml_hero_caption">My Main: Kagura — strategy, patience, and a touch of creativity</p>
             </div>
         </div>
     </div>
 
+    <!-- IMAGE LIGHTBOX (for profile photo & other zoomable images) -->
+    <div id="imgLightbox" class="overlay lightbox-overlay">
+        <div class="lightbox-content">
+            <span class="close-btn lightbox-close"><i class="fa-solid fa-xmark"></i></span>
+            <img id="lightboxImg" src="" alt="Full size preview" class="lightbox-img">
+        </div>
+    </div>
+
     <section id="skills">
-        <h2 class="section-heading">Skills</h2>
+        <h2 class="section-heading" data-i18n="skills_heading">Skills</h2>
         <div class="skills-wrapper">
             <span class="skill-pill">Power BI</span>
             <span class="skill-pill">HTML</span>
@@ -72,6 +112,7 @@
             <span class="skill-pill">Excel</span>
             <span class="skill-pill">MATLAB</span>
             <span class="skill-pill">SPSS</span>
+            <span class="skill-pill">Google Sheets</span>
         </div>
         </div>
         </div>
@@ -79,13 +120,13 @@
 
     <!-- EDUCATION -->
     <section id="education">
-        <h2 class="section-heading">Education</h2>
+        <h2 class="section-heading" data-i18n="education_heading">Education</h2>
         <div class="timeline">
             <div class="timeline-item reveal-box">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-year">2022 - 2026</p>
-                    <p class="timeline-title">Bachelor of Science (Hons.) Mathematical Modelling and Analytics</p>
+                    <p class="timeline-year">Oct 2022 - Mar 2026</p>
+                    <p class="timeline-title" data-i18n="edu1_title">Bachelor of Science (Hons.) Mathematical Modelling and Analytics</p>
                     <p class="timeline-sub">UiTM Shah Alam</p>
                     <span class="cgpa-badge">CGPA 3.24</span>
                 </div>
@@ -93,8 +134,8 @@
             <div class="timeline-item reveal-box">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-year">2020 - 2022</p>
-                    <p class="timeline-title">Science Stream, Module 1</p>
+                    <p class="timeline-year">Aug 2020 - May 2022</p>
+                    <p class="timeline-title" data-i18n="edu2_title">Science Stream, Module 1</p>
                     <p class="timeline-sub">Kolej Matrikulasi Labuan</p>
                     <span class="cgpa-badge">CGPA 3.46</span>
                 </div>
@@ -104,68 +145,144 @@
 
     <!-- ACHIEVEMENTS -->
     <section id="achievements">
-        <h2 class="section-heading">Achievements</h2>
+        <h2 class="section-heading" data-i18n="achievements_heading">Achievements</h2>
         <div class="badge-grid">
             <div class="badge-card reveal-box">
-                <span class="badge-icon">🎓</span>
-                <p class="badge-text">Dean's List, Semester 5 &amp; 6</p>
+                <span class="badge-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+                <p class="badge-text" data-i18n="ach1">Dean's List, Semester 5 &amp; 6</p>
             </div>
             <div class="badge-card reveal-box">
-                <span class="badge-icon">🎗️</span>
-                <p class="badge-text">Recipient of Biasiswa Kerajaan Negeri Sabah (BKNS) scholarship</p>
+                <span class="badge-icon"><i class="fa-solid fa-award"></i></span>
+                <p class="badge-text" data-i18n="ach2">Recipient of Biasiswa Kerajaan Negeri Sabah (BKNS) scholarship</p>
             </div>
             <div class="badge-card reveal-box">
-                <span class="badge-icon">🥉</span>
-                <p class="badge-text">Led &amp; trained the Kembara cheerleading team to 3rd place, PERKAD kawad kaki competition</p>
+                <span class="badge-icon"><i class="fa-solid fa-medal"></i></span>
+                <p class="badge-text" data-i18n="ach3">Led &amp; trained the Kembara cheerleading team to 3rd place, PERKAD kawad kaki competition</p>
             </div>
             <div class="badge-card reveal-box">
-                <span class="badge-icon">🎮</span>
-                <p class="badge-text">4th place, Mobile Legends inter-college tournament (SUKOL)</p>
+                <span class="badge-icon"><i class="fa-solid fa-gamepad"></i></span>
+                <p class="badge-text" data-i18n="ach4">4th place, Mobile Legends inter-college tournament (SUKOL)</p>
             </div>
             <div class="badge-card reveal-box">
-                <span class="badge-icon">🏆</span>
-                <p class="badge-text">Led 25 committee members organizing futsal &amp; netball tournaments with 100+ participants</p>
+                <span class="badge-icon"><i class="fa-solid fa-trophy"></i></span>
+                <p class="badge-text" data-i18n="ach5">Led 25 committee members organizing futsal &amp; netball tournaments with 100+ participants</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LICENSES & CERTIFICATION -->
+    <section id="licenses">
+        <h2 class="section-heading" data-i18n="licenses_heading">Licenses &amp; Certification</h2>
+        <p class="about-intro" data-i18n="licenses_intro">Select View Certificate on any card for a closer look.</p>
+        <div class="cert-grid">
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <p class="cert-title" data-i18n="cert1_title">Navigating Through Microsoft Power BI</p>
+                <p class="cert-issuer">HRD Corp e-LATiH · Ministry of Human Resources</p>
+                <span class="cert-date">22 May 2026</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/powerbi_navigating.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
+            </div>
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-chart-column"></i></span>
+                <p class="cert-title" data-i18n="cert2_title">PowerBI (Business Intelligence)</p>
+                <p class="cert-issuer">Universiti Teknologi MARA</p>
+                <span class="cert-date">17–18 Dec 2025</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/powerbi_sijil.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
+            </div>
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-table-cells"></i></span>
+                <p class="cert-title" data-i18n="cert3_title">Exploring Excel</p>
+                <p class="cert-issuer">Kelab Matematik, UiTM Shah Alam</p>
+                <span class="cert-date">2 Dec 2023</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/sijil_excel.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
+            </div>
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-bullhorn"></i></span>
+                <p class="cert-title" data-i18n="cert4_title"> Cheer Team Participant — PERKAD 2022</p>
+                <p class="cert-issuer">Majlis Perwakilan Komander Kesatria, UiTM</p>
+                <span class="cert-date">17–18 Dec 2022</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/sijil_penyertaan_sorak.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
+            </div>
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-medal"></i></span>
+                <p class="cert-title" data-i18n="cert5_title">3rd Place - Cheer Competition</p>
+                <p class="cert-issuer">PERKAD 2022, UiTM Shah Alam</p>
+                <span class="cert-date">17–18 Dec 2022</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/sijil_ketiga_sorak.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
+            </div>
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-heart"></i></span>
+                <p class="cert-title" data-i18n="cert6_title">Mawar Charity Fun Day 2023</p>
+                <p class="cert-issuer">Kolej Kediaman Mawar, UiTM</p>
+                <span class="cert-date">25 Nov 2023</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/sijil_mawar_charity.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
+            </div>
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-globe"></i></span>
+                <p class="cert-title" data-i18n="cert7_title">Global Webinar Series: Youth Volunteers</p>
+                <p class="cert-issuer">Jawatankuasa Perwakilan Kolej Mawar</p>
+                <span class="cert-date">15 Jun 2024</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/sijil_global_webinar.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
+            </div>
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-people-group"></i></span>
+                <p class="cert-title" data-i18n="cert8_title">Altruism Festival 3.0</p>
+                <p class="cert-issuer">Akademi Pengajian Bahasa, UiTM</p>
+                <span class="cert-date">7 Oct 2023</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/cert_altruisme.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
+            </div>
+            <div class="cert-card reveal-box">
+                <span class="cert-icon"><i class="fa-solid fa-radiation"></i></span>
+                <p class="cert-title" data-i18n="cert9_title">Tour of the PUSPATI TRIGA Reactor</p>
+                <p class="cert-issuer">Nuklear Malaysia</p>
+                <span class="cert-date">11 Apr 2025</span><br>
+                <button class="cert-btn zoomable" data-full="images/certs/cert_puspati.jpg" data-i18n="cert_view_btn"><i class="fa-solid fa-eye"></i> View Certificate</button>
             </div>
         </div>
     </section>
 
     <!-- WORK EXPERIENCE -->
     <section id="experience">
-        <h2 class="section-heading">Work Experience</h2>
+        <h2 class="section-heading" data-i18n="experience_heading">Work Experience</h2>
         <div class="timeline">
             <div class="timeline-item reveal-box">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-title">Apprentice</p>
-                    <p class="timeline-sub">K-Youth Development Programme — Khazanah Nasional x Aisling Group</p>
+                    <p class="timeline-year">Mar 2026 - April 2026</p>
+                    <p class="timeline-title" data-i18n="exp1_title">Apprentice</p>
+                    <p class="timeline-sub" data-i18n="exp1_sub">K-Youth Development Programme — Khazanah Nasional x Aisling Group</p>
                 </div>
             </div>
             <div class="timeline-item reveal-box">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-title">Data Analyst Intern</p>
-                    <p class="timeline-sub">Unijaya Resources Sdn Bhd</p>
+                    <p class="timeline-year">Oct 2025 - Jan 2026</p>
+                    <p class="timeline-title" data-i18n="exp2_title">Data Analyst Intern</p>
+                    <p class="timeline-sub" data-i18n="exp2_sub">Unijaya Resources Sdn Bhd</p>
                 </div>
             </div>
             <div class="timeline-item reveal-box">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-title">Printing Service Owner</p>
-                    <p class="timeline-sub">Kolej Mawar, UiTM Shah Alam</p>
+                    <p class="timeline-year">Aug 2022 - Dec 2024</p>
+                    <p class="timeline-title" data-i18n="exp3_title">Printing Service Owner</p>
+                    <p class="timeline-sub" data-i18n="exp3_sub">Kolej Mawar, UiTM Shah Alam</p>
                 </div>
             </div>
             <div class="timeline-item reveal-box">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-title">Mathematics &amp; Science Tutor</p>
-                    <p class="timeline-sub">Tuisyen Mesra PPR Lembah Subang 2</p>
+                    <p class="timeline-year">Jun 2023 - Jan 2024</p>
+                    <p class="timeline-title" data-i18n="exp4_title">Mathematics &amp; Science Tutor</p>
+                    <p class="timeline-sub" data-i18n="exp4_sub">Tuisyen Mesra PPR Lembah Subang 2</p>
                 </div>
             </div>
             <div class="timeline-item reveal-box">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
-                    <p class="timeline-title">Banquet Food Server (Part Time)</p>
-                    <p class="timeline-sub">Malaysia International Trade and Exhibition Centre (MITEC)</p>
+                    <p class="timeline-year">July 2023</p>
+                    <p class="timeline-title" data-i18n="exp5_title">Banquet Food Server (Part Time)</p>
+                    <p class="timeline-sub" data-i18n="exp5_sub">Malaysia International Trade and Exhibition Centre (MITEC)</p>
                 </div>
             </div>
         </div>
@@ -173,62 +290,63 @@
 
     <!-- LANGUAGES -->
     <section id="languages">
-        <h2 class="section-heading">Languages</h2>
+        <h2 class="section-heading" data-i18n="languages_heading">Languages</h2>
         <div class="skills-wrapper">
-            <span class="skill-pill lang-pill">🇲🇾 Malay</span>
-            <span class="skill-pill lang-pill">🇬🇧 English</span>
-            <span class="skill-pill lang-pill">🇯🇵 Japanese</span>
+            <span class="skill-pill lang-pill"><i class="fa-solid fa-language"></i> Malay</span>
+            <span class="skill-pill lang-pill"><i class="fa-solid fa-language"></i> English</span>
+            <span class="skill-pill lang-pill"><i class="fa-solid fa-language"></i> Japanese</span>
         </div>
     </section>
 
     <!-- VOLUNTEERING -->
     <section id="volunteering">
-        <h2 class="section-heading">Volunteering</h2>
+        <h2 class="section-heading" data-i18n="volunteering_heading">Volunteering</h2>
         <div class="vision-grid">
             <div class="vision-card reveal-box">
-                <p class="vision-title">🎉 Festival Altruisme 3.0</p>
-                <p class="vision-desc">Assisted in organizing a university festival centered on altruism and community engagement — supported event logistics, coordinated program activities, and assisted participants.</p>
+                <p class="vision-title" data-i18n="vol1_title"><i class="fa-solid fa-people-group"></i> Festival Altruisme 3.0</p>
+                <p class="vision-desc" data-i18n="vol1_desc">Assisted in organizing a university festival centered on altruism and community engagement — supported event logistics, coordinated program activities, and assisted participants.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">🏎️ Petronas GPM Grand Prix 2023</p>
-                <p class="vision-desc">Volunteered as a UiTM representative at national motorsport events, supporting event activities and promoting student engagement.</p>
+                <p class="vision-title" data-i18n="vol2_title"><i class="fa-solid fa-flag-checkered"></i> Petronas GPM Grand Prix 2023</p>
+                <p class="vision-desc" data-i18n="vol2_desc">Volunteered as a UiTM representative at national motorsport events, supporting event activities and promoting student engagement.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">🎓 UiTM Convocation Ceremony</p>
-                <p class="vision-desc">Assisted in managing event operations during graduation ceremonies, coordinating logistics and supporting graduates and guests.</p>
+                <p class="vision-title" data-i18n="vol3_title"><i class="fa-solid fa-graduation-cap"></i> UiTM Convocation Ceremony</p>
+                <p class="vision-desc" data-i18n="vol3_desc">Assisted in managing event operations during graduation ceremonies, coordinating logistics and supporting graduates and guests.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">🌱 Hari Komuniti MyPLUS</p>
-                <p class="vision-desc">Contributed to school-led community clean-up initiatives, encouraging teamwork and community responsibility.</p>
+                <p class="vision-title" data-i18n="vol4_title"><i class="fa-solid fa-seedling"></i> Hari Komuniti MyPLUS</p>
+                <p class="vision-desc" data-i18n="vol4_desc">Contributed to school-led community clean-up initiatives, encouraging teamwork and community responsibility.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">💝 Mawar Charity Fun Day</p>
-                <p class="vision-desc">Planned and coordinated activities with orphans at Rumah Amal Budi Bistari, Shah Alam — interactive games, batik weaving sessions, and charity contributions.</p>
+                <p class="vision-title" data-i18n="vol5_title"><i class="fa-solid fa-heart"></i> Mawar Charity Fun Day</p>
+                <p class="vision-desc" data-i18n="vol5_desc">Planned and coordinated activities with orphans at Rumah Amal Budi Bistari, Shah Alam — interactive games, batik weaving sessions, and charity contributions.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">☢️ PUSPATI TRIGA Reactor Tour</p>
-                <p class="vision-desc">Gained exposure to nuclear reactor operations, safety protocols, and research applications in energy and science.</p>
+                <p class="vision-title" data-i18n="vol6_title"><i class="fa-solid fa-radiation"></i> PUSPATI TRIGA Reactor Tour</p>
+                <p class="vision-desc" data-i18n="vol6_desc">Gained exposure to nuclear reactor operations, safety protocols, and research applications in energy and science.</p>
             </div>
         </div>
     </section>
 
     <!-- PROJECTS -->
     <section id="projects">
-        <h2 class="section-heading">Projects</h2>
-        <p class="about-intro">Hover a card to flip it and see the tools &amp; story behind each one. ✨</p>
+        <h2 class="section-heading" data-i18n="projects_heading">Projects</h2>
+        <p class="about-intro" data-i18n="projects_intro">Hover a card to flip it and see the tools &amp; story behind each one.</p>
 
         <div class="flip-grid">
             <div class="flip-card reveal-box">
                 <div class="flip-inner">
                     <div class="flip-front thumb-pink">
-                        <span class="flip-icon">🌀</span>
-                        <p class="flip-title">Final Year Project</p>
-                        <p class="flip-sub">Hybrid Nanofluid Flow Modelling</p>
+                        <span class="flip-icon"><i class="fa-solid fa-flask"></i></span>
+                        <p class="flip-title" data-i18n="proj1_front_title">Final Year Project</p>
+                        <p class="flip-sub" data-i18n="proj1_front_sub">Hybrid Nanofluid Flow Modelling</p>
                     </div>
-                    <div class="flip-back">
-                        <p class="flip-back-title">Mixed Convection Flow of Hybrid Nanofluids</p>
-                        <p class="flip-back-desc">Developed the mathematical model for mixed convection behavior of hybrid nanofluids flowing toward a stagnation point on a stretching cylinder with Newtonian heating effects.</p>
+                    <div class="flip-back back-pink">
+                        <p class="flip-back-title" data-i18n="proj1_back_title">Mixed Convection Flow of Hybrid Nanofluids</p>
+                        <p class="flip-back-desc" data-i18n="proj1_back_desc">Developed the mathematical model for mixed convection behavior of hybrid nanofluids flowing toward a stagnation point on a stretching cylinder with Newtonian heating effects.</p>
                         <span class="tool-tag">MATLAB</span>
+                        <button class="overview-btn" data-modal="fypModal" data-i18n="overview_btn"><i class="fa-solid fa-magnifying-glass"></i> Overview</button>
                     </div>
                 </div>
             </div>
@@ -236,15 +354,16 @@
             <div class="flip-card reveal-box">
                 <div class="flip-inner">
                     <div class="flip-front thumb-green">
-                        <span class="flip-icon">📈</span>
-                        <p class="flip-title">Economic Forecasting</p>
-                        <p class="flip-sub">US Policy Uncertainty Index</p>
+                        <span class="flip-icon"><i class="fa-solid fa-chart-line"></i></span>
+                        <p class="flip-title" data-i18n="proj2_front_title">Economic Forecasting</p>
+                        <p class="flip-sub" data-i18n="proj2_front_sub">US Policy Uncertainty Index</p>
                     </div>
-                    <div class="flip-back">
-                        <p class="flip-back-title">Forecasting the U.S. EPU Index</p>
-                        <p class="flip-back-desc">Conducted time series forecasting on the U.S. Economic Policy Uncertainty Index, providing insights that support aviation industry decisions on capacity planning and strategy.</p>
+                    <div class="flip-back back-green">
+                        <p class="flip-back-title" data-i18n="proj2_back_title">Forecasting the U.S. EPU Index</p>
+                        <p class="flip-back-desc" data-i18n="proj2_back_desc">Conducted time series forecasting on the U.S. Economic Policy Uncertainty Index, providing insights that support aviation industry decisions on capacity planning and strategy.</p>
                         <span class="tool-tag">SPSS</span>
                         <span class="tool-tag">Excel</span>
+                        <button class="overview-btn" data-modal="econModal" data-i18n="overview_btn"><i class="fa-solid fa-magnifying-glass"></i> Overview</button>
                     </div>
                 </div>
             </div>
@@ -252,129 +371,437 @@
             <div class="flip-card reveal-box">
                 <div class="flip-inner">
                     <div class="flip-front thumb-lilac">
-                        <span class="flip-icon">🏍️</span>
-                        <p class="flip-title">Used Bike Market Insights</p>
-                        <p class="flip-sub">India Decision Support System</p>
+                        <span class="flip-icon"><i class="fa-solid fa-motorcycle"></i></span>
+                        <p class="flip-title" data-i18n="proj3_front_title">Used Bike Market Insights</p>
+                        <p class="flip-sub" data-i18n="proj3_front_sub">India Decision Support System</p>
                     </div>
-                    <div class="flip-back">
-                        <p class="flip-back-title">Used Bike Market Decision Support</p>
-                        <p class="flip-back-desc">Developed a decision support system to visualize and analyze used bike market factors, enabling clearer interpretation for early detection.</p>
+                    <div class="flip-back back-lilac">
+                        <p class="flip-back-title" data-i18n="proj3_back_title">Used Bike Market Decision Support</p>
+                        <p class="flip-back-desc" data-i18n="proj3_back_desc">Developed an interactive Power BI decision support dashboard to analyze used bike market trends, pricing factors, and ownership patterns, enabling data-driven decisions for price optimization, inventory planning, and market trend analysis.</p>
                         <span class="tool-tag">Power BI</span>
-                        <span class="tool-tag">Excel</span>
+                        <button class="overview-btn" data-modal="bikeModal" data-i18n="overview_btn"><i class="fa-solid fa-magnifying-glass"></i> Overview</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flip-card reveal-box">
+                <div class="flip-inner">
+                    <div class="flip-front thumb-blue">
+                        <span class="flip-icon"><i class="fa-solid fa-hotel"></i></span>
+                        <p class="flip-title" data-i18n="proj4_front_title">Hotel Reservation System</p>
+                        <p class="flip-sub" data-i18n="proj4_front_sub">ROOMA Hotel Database</p>
+                    </div>
+                    <div class="flip-back back-blue">
+                        <p class="flip-back-title" data-i18n="proj4_back_title">Hotel ROOMA Reservation Management System</p>
+                        <p class="flip-back-desc" data-i18n="proj4_back_desc">Developed a hotel reservation management system using Microsoft Access, applying relational database design, SQL, forms, and reports to streamline reservation processes and improve data management.</p>
+                        <span class="tool-tag">Microsoft Access</span>
+                        <button class="overview-btn" data-modal="roomaModal" data-i18n="overview_btn"><i class="fa-solid fa-magnifying-glass"></i> Overview</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h3 class="subsection-heading">Internship Projects</h3>
+        <h3 class="subsection-heading" data-i18n="internship_heading">Internship Projects</h3>
         <div class="accordion">
             <div class="accordion-item">
                 <button class="accordion-header">
-                    <span>🖥️ IRIS — Sistem Pengambilan Bersepadu (SPA Malaysia)</span>
+                    <span data-i18n="acc1_header"><i class="fa-solid fa-desktop"></i> IRIS — Sistem Pengambilan Bersepadu (SPA Malaysia)</span>
                     <span class="accordion-arrow">▾</span>
                 </button>
                 <div class="accordion-body">
                     <ul>
-                        <li>System tester for Modul Tawaran, Kertas Suruhanjaya, and Reports</li>
-                        <li>Assisted in preparation of the Final Acceptance Test (FAT)</li>
+                        <li data-i18n="acc1_li1">Conducted system testing for key modules, identifying defects and ensuring system functionality met business and user requirements.</li>
+                        <li data-i18n="acc1_li2">Supported Final Acceptance Testing (FAT) by using Bluedot AI to capture meeting minutes, ensuring all feedback, decisions, and action items were accurately documented.</li>
+                        <li data-i18n="acc1_li3">Used NotebookLM (Google AI) to quickly understand system workflows, improving testing speed and collaboration with team members.</li>
+                        <li data-i18n="acc1_li4">Managed a centralized Google Sheets defect tracker to log issues, monitor testing progress, and follow up on bug fixes with developers.</li>
+
                     </ul>
                 </div>
             </div>
             <div class="accordion-item">
                 <button class="accordion-header">
-                    <span>📊 NSFiRM — National Suicide and Fatal Injury Registry (MOH Malaysia)</span>
+                    <span data-i18n="acc2_header"><i class="fa-solid fa-chart-column"></i> NSFiRM — National Suicide and Fatal Injury Registry (MOH Malaysia)</span>
                     <span class="accordion-arrow">▾</span>
                 </button>
                 <div class="accordion-body">
                     <ul>
-                        <li>Developed and enhanced NSFiRM dashboards in Power BI, including DAX measures, map visualizations, and interactive report features</li>
-                        <li>Tested dashboard logic at national and state levels</li>
-                        <li>Published and managed Power BI embed links for system integration and reporting updates using Excel</li>
-                        <li>Worked with Navicat to explore the NSFiRM database structure, tables, relationships, and data flow</li>
+                        <li data-i18n="acc2_li1">Assisted in developing and enhancing NSFiRM dashboards in Power BI, including DAX measures,Power Query M code, map visualizations, and interactive report features.</li>
+                        <li data-i18n="acc2_li2">Tested dashboard logic at national and state levels</li>
+                        <li data-i18n="acc2_li3">Published and managed Power BI embed links for system integration and reporting updates using Google Sheets</li>
+                        <li data-i18n="acc2_li4">Worked with Navicat to explore the NSFiRM database structure, tables, relationships, and data flow</li>
+                        <li data-i18n="acc2_li5">Utilized ChatGPT and Claude AI to accelerate the development of advanced DAX and Power Query (M) solutions, enhancing dashboard functionality, performance, and user experience in Power BI.</li>
                     </ul>
+                    <button class="overview-btn" data-modal="nsfirmModal" data-i18n="overview_btn"><i class="fa-solid fa-magnifying-glass"></i> Overview</button>
                 </div>
             </div>
             <div class="accordion-item">
                 <button class="accordion-header">
-                    <span>🌐 AI Translation Tool</span>
+                    <span data-i18n="acc3_header"><i class="fa-solid fa-globe"></i> AI Translation Tool</span>
                     <span class="accordion-arrow">▾</span>
                 </button>
                 <div class="accordion-body">
                     <ul>
-                        <li>Developed an AI-powered translation workflow using the Google Gemini API in Laravel to automate multilingual localization via UI and CLI</li>
-                        <li>Researched and applied AI-assisted UI/UX design using Figma AI and Vuexy components to streamline interface design</li>
-                        <li>Prepared and delivered a technical presentation on the objectives, workflow, and benefits of the tool</li>
+                        <li data-i18n="acc3_li1">Assisted in developing an AI-powered translation workflow using the Google Gemini API in Laravel to automate multilingual localization through both UI and CLI.</li>
+                        <li data-i18n="acc3_li2">Researched and applied AI-assisted UI/UX design using Figma AI and Vuexy components to streamline interface design.</li>
+                        <li data-i18n="acc3_li3">Prepared and delivered a technical presentation on the objectives, workflow, and benefits of the tool.</li>
+                        <li data-i18n="acc3_li4">Leveraged Claude AI to deepen understanding of Laravel development and Laragon environment configuration, troubleshoot implementation challenges, optimize code quality, and apply software engineering best practices. </li>
                     </ul>
+                    <button class="overview-btn" data-modal="aiModal" data-i18n="overview_btn"><i class="fa-solid fa-magnifying-glass"></i> Overview</button>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- PROJECT OVERVIEW MODALS -->
+
+    <!-- FYP MODAL -->
+    <div id="fypModal" class="overlay project-overlay">
+        <div class="project-modal modal-fyp">
+            <span class="close-btn project-close"><i class="fa-solid fa-xmark"></i></span>
+            <div class="project-modal-header">
+                <span class="project-modal-icon"><i class="fa-solid fa-flask"></i></span>
+                <p class="project-modal-title" data-i18n="proj1_popup_title">Mixed Convection Flow of Hybrid Nanofluids</p>
+            </div>
+            <ul class="project-overview-list" data-i18n-list="proj1_overview">
+                <li>Developed a computational model to simulate heat transfer behavior in hybrid nanofluids.</li>
+                <li>Analyzed complex datasets generated through MATLAB simulations to identify performance trends and parameter relationships.</li>
+                <li>Translated numerical results into actionable engineering insights through data visualization and analytical reporting.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="tool-tag">MATLAB</span>
+            </div>
+
+            <p class="slide-label1" data-i18n="slide_label1"><i class="fa-solid fa-file-lines"></i>  Project Slides </p>
+            <div class="slide-viewer">
+                <button class="slide-nav prev" data-gallery="fyp">‹</button>
+                <div class="slide-frame">
+                    <img id="fypSlideImg" class="slide-img zoomable" src="images/fyp_slides/slide-01.jpg" alt="FYP slide">
+                </div>
+                <button class="slide-nav next" data-gallery="fyp">›</button>
+            </div>
+            <p class="slide-counter"><span id="fypCounter">1 / 31</span></p>
+        </div>
+    </div>
+
+    <!-- ECONOMIC FORECASTING MODAL -->
+    <div id="econModal" class="overlay project-overlay">
+        <div class="project-modal modal-econ">
+            <span class="close-btn project-close"><i class="fa-solid fa-xmark"></i></span>
+            <div class="project-modal-header">
+                <span class="project-modal-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <p class="project-modal-title" data-i18n="proj2_popup_title">Forecasting the U.S. EPU Index</p>
+            </div>
+            <ul class="project-overview-list" data-i18n-list="proj2_overview">
+                <li>Built a predictive model for KLCI using time series regression and macroeconomic indicators.</li>
+                <li>Improved model performance through feature selection (GETS), multicollinearity analysis (VIF), and statistical validation.</li>
+                <li>Delivered reliable forecasts by evaluating model accuracy with R², Durbin-Watson, residual diagnostics, and one-step-ahead forecasting.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="tool-tag">SPSS</span>
+                <span class="tool-tag">Excel</span>
+            </div>
+
+            <p class="slide-label" data-i18n="slide_label"><i class="fa-solid fa-file-lines"></i>  Full Project Report </p>
+            <div class="slide-viewer">
+                <button class="slide-nav prev" data-gallery="econ">‹</button>
+                <div class="slide-frame">
+                    <img id="econSlideImg" class="slide-img zoomable" src="images/econ_slides/slide-01.jpg" alt="Economic forecasting slide">
+                </div>
+                <button class="slide-nav next" data-gallery="econ">›</button>
+            </div>
+            <p class="slide-counter"><span id="econCounter">1 / 28</span></p>
+        </div>
+    </div>
+
+    <!-- NSFIRM DASHBOARD MODAL -->
+    <div id="nsfirmModal" class="overlay project-overlay">
+        <div class="project-modal modal-nsfirm">
+            <span class="close-btn project-close"><i class="fa-solid fa-xmark"></i></span>
+            <div class="project-modal-header">
+                <span class="project-modal-icon"><i class="fa-solid fa-chart-column"></i></span>
+                <p class="project-modal-title" data-i18n="nsfirm_popup_title">NSFiRM Dashboard using Power BI</p>
+            </div>
+            <ul class="project-overview-list" data-i18n-list="nsfirm_overview">
+                <li>Assisted in developing and enhancing NSFiRM dashboards in Power BI, including DAX measures, map visualizations, and interactive report features.</li>
+                <li>Tested dashboard logic at national and state levels.</li>
+                <li>Published and managed Power BI embed links for system integration and reporting updates using Excel.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="tool-tag">Power BI</span>
+                <span class="tool-tag">Excel</span>
+                <span class="tool-tag">Navicat</span>
+            </div>
+
+            <p class="slide-label" data-i18n="nsfirm_slide_label"><i class="fa-solid fa-chart-column"></i> Dashboard Previews</p>
+            <div class="slide-viewer">
+                <button class="slide-nav prev" data-gallery="nsfirm">‹</button>
+                <div class="slide-frame">
+                    <img id="nsfirmSlideImg" class="slide-img zoomable" src="images/PSN_dashboard_prev.jpg" alt="NSFiRM dashboard preview">
+                </div>
+                <button class="slide-nav next" data-gallery="nsfirm">›</button>
+            </div>
+            <p class="slide-counter"><span id="nsfirmCounter">1 / 3</span></p>
+        </div>
+    </div>
+
+    <!-- AI TRANSLATION TOOL MODAL -->
+    <div id="aiModal" class="overlay project-overlay">
+        <div class="project-modal modal-ai">
+            <span class="close-btn project-close"><i class="fa-solid fa-xmark"></i></span>
+            <div class="project-modal-header">
+                <span class="project-modal-icon"><i class="fa-solid fa-globe"></i></span>
+                <p class="project-modal-title" data-i18n="ai_popup_title">AI Translation Tool</p>
+            </div>
+            <ul class="project-overview-list" data-i18n-list="ai_overview">
+                <li>Assisted in developing an AI-powered translation workflow using the Google Gemini API in Laravel to automate multilingual localization through both UI and CLI.</li>
+                <li>Researched and applied AI-assisted UI/UX design using Figma AI and Vuexy components to streamline interface design.</li>
+                <li>Prepared and delivered a technical presentation on the objectives, workflow, and benefits of the tool.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="tool-tag">Laravel</span>
+                <span class="tool-tag">Gemini API</span>
+                <span class="tool-tag">Figma AI</span>
+            </div>
+
+            <p class="slide-label" data-i18n="ai_slide_label"><i class="fa-solid fa-screwdriver-wrench"></i> Tool Preview &amp; Presentation Slides</p>
+            <div class="slide-viewer">
+                <button class="slide-nav prev" data-gallery="ai">‹</button>
+                <div class="slide-frame">
+                    <img id="aiSlideImg" class="slide-img zoomable" src="images/automation_slides/slide-01.jpg" alt="AI translation tool automation slide">
+                </div>
+                <button class="slide-nav next" data-gallery="ai">›</button>
+            </div>
+            <p class="slide-counter"><span id="aiCounter">1 / 21</span></p>
+        </div>
+    </div>
+
+    <!-- USED BIKE MARKET MODAL -->
+    <div id="bikeModal" class="overlay project-overlay">
+        <div class="project-modal modal-bike">
+            <span class="close-btn project-close"><i class="fa-solid fa-xmark"></i></span>
+            <div class="project-modal-header">
+                <span class="project-modal-icon"><i class="fa-solid fa-motorcycle"></i></span>
+                <p class="project-modal-title" data-i18n="proj3_popup_title">Used Bike Market Decision Support</p>
+            </div>
+
+            <div class="bike-overview-block">
+                <p class="bike-overview-heading" data-i18n="bike_o1_title">1. Price Optimization Strategy</p>
+                <p class="bike-overview-sub" data-i18n="bike_decision_supported">Decision Supported:</p>
+                <ul data-i18n-list="bike_o1_list">
+                    <li>Identify the optimal selling price based on ownership history, bike model, and production year.</li>
+                    <li>Help sellers set competitive prices while enabling buyers to determine whether a listing is fairly priced.</li>
+                </ul>
+            </div>
+            <div class="bike-overview-block">
+                <p class="bike-overview-heading" data-i18n="bike_o2_title">2. Market Demand &amp; Inventory Planning</p>
+                <p class="bike-overview-sub" data-i18n="bike_decision_supported">Decision Supported:</p>
+                <ul data-i18n-list="bike_o2_list">
+                    <li>Determine which bike models and ownership categories dominate the market.</li>
+                    <li>Assist dealerships in deciding which bike types should be prioritized for purchasing, stocking, or resale.</li>
+                </ul>
+            </div>
+            <div class="bike-overview-block">
+                <p class="bike-overview-heading" data-i18n="bike_o3_title">3. Trend &amp; Risk Analysis</p>
+                <p class="bike-overview-sub" data-i18n="bike_decision_supported">Decision Supported:</p>
+                <ul data-i18n-list="bike_o3_list">
+                    <li>Monitor historical price trends and identify factors (e.g., horsepower, mileage, year) that affect resale value.</li>
+                    <li>Support strategic buying and selling decisions by recognizing market trends and potential pricing risks.</li>
+                </ul>
+            </div>
+
+            <div class="tag-row">
+                <span class="tool-tag">Power BI</span>
+                <span class="tool-tag">Excel</span>
+            </div>
+
+            <p class="slide-label" data-i18n="dashboard_label"><i class="fa-solid fa-chart-column"></i> Dashboard Preview</p>
+            <div class="bike-dashboard-frame">
+                <img src="images/bikedash_web.jpg" alt="Used Bike Market Power BI dashboard" class="bike-dashboard-img zoomable" data-full="images/bikedash_web.jpg" title="Click to view full size">
+            </div>
+        </div>
+    </div>
+
+    <!-- HOTEL ROOMA RESERVATION SYSTEM MODAL -->
+    <div id="roomaModal" class="overlay project-overlay">
+        <div class="project-modal modal-rooma">
+            <span class="close-btn project-close"><i class="fa-solid fa-xmark"></i></span>
+            <div class="project-modal-header">
+                <span class="project-modal-icon"><i class="fa-solid fa-hotel"></i></span>
+                <p class="project-modal-title" data-i18n="rooma_popup_title">Hotel ROOMA Reservation Management System</p>
+            </div>
+            <ul class="project-overview-list" data-i18n-list="rooma_overview">
+                <li><strong>Designed a Structured Relational Database</strong> — Designed and normalized a relational database (3NF) to ensure data consistency, eliminate redundancy, and establish efficient relationships between customers, reservations, rooms, employees, receipts, and room services.</li>
+                <li><strong>Developed SQL Queries for Business Insights</strong> — Created SQL queries to analyze operational data, including total sales, customer segmentation, employee statistics, room availability, payment analysis, and reservation trends to support data-driven decision-making.</li>
+                <li><strong>Improved Data Management &amp; Reporting</strong> — Developed interactive forms and automated reports to simplify reservation management, enhance data accuracy, reduce manual processing, and enable faster retrieval of business information.</li>
+            </ul>
+            <div class="tag-row">
+                <span class="tool-tag">Microsoft Access</span>
+                <span class="tool-tag">SQL Queries</span>
+                <span class="tool-tag">Relational Database Design</span>
+                <span class="tool-tag">ERD</span>
+                <span class="tool-tag">Database Normalization (3NF)</span>
+                <span class="tool-tag">Forms &amp; Reports</span>
+                <span class="tool-tag">Data Validation &amp; Integrity</span>
+                <span class="tool-tag">Data Management</span>
+            </div>
+
+            <p class="slide-label" data-i18n="rooma_slide_label"><i class="fa-solid fa-file-lines"></i> Full Project Report</p>
+            <div class="slide-viewer">
+                <button class="slide-nav prev" data-gallery="rooma">‹</button>
+                <div class="slide-frame">
+                    <img id="roomaSlideImg" class="slide-img zoomable" src="images/rooma_slides/slide-01.jpg" alt="ROOMA hotel reservation report slide">
+                </div>
+                <button class="slide-nav next" data-gallery="rooma">›</button>
+            </div>
+            <p class="slide-counter"><span id="roomaCounter">1 / 36</span></p>
+        </div>
+    </div>
 
     <!-- VISION BOARD -->
     <section id="vision">
-        <h2 class="section-heading">Vision Board</h2>
-        <p class="vision-quote">"My best version is still becoming."</p>
+        <h2 class="section-heading" data-i18n="vision_heading">Vision Board</h2>
+        <p class="vision-quote" data-i18n="vision_quote">"My best version is still becoming."</p>
 
         <div class="vision-grid">
             <div class="vision-card reveal-box">
-                <p class="vision-title">Dress well</p>
-                <p class="vision-desc">Dress with elegance and carry myself with confidence.</p>
+                <p class="vision-title" data-i18n="vc_dress_title">Dress well</p>
+                <p class="vision-desc" data-i18n="vc_dress_desc">Dress with elegance and carry myself with confidence.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">Healthy lifestyle</p>
-                <p class="vision-desc">Eat well, stay active, and take care of my mind, body and soul.</p>
+                <p class="vision-title" data-i18n="vc_health_title">Healthy lifestyle</p>
+                <p class="vision-desc" data-i18n="vc_health_desc">Eat well, stay active, and take care of my mind, body and soul.</p>
             </div>
-            <div class="vision-card reveal-box highlight">
-                <p class="vision-title">Side business / Own brand</p>
-                <p class="vision-desc">Build my own brand, inspire more women, and create timeless pieces that empower — Jelita Aurelle, where elegance meets confidence.</p>
-            </div>
-            <div class="vision-card reveal-box">
-                <p class="vision-title">Master more digital skills</p>
-                <p class="vision-desc">Level up my skills in data, analytics, design and tech to stay future-ready.</p>
+            <div class="vision-card reveal-box highlight brand-card">
+                <p class="vision-title" data-i18n="vc_brand_title">Side business / Own brand</p>
+                <p class="vision-desc" data-i18n="vc_brand_desc">Build my own brand, inspire more women, and create timeless pieces that empower — Jelita Aurelle, where elegance meets confidence.</p>
+                <button class="overview-btn brand-overview-btn" id="openBrandBtn" data-i18n="overview_btn"><i class="fa-solid fa-magnifying-glass"></i> Overview</button>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">Community project</p>
-                <p class="vision-desc">Give back, make an impact, and be part of something meaningful.</p>
+                <p class="vision-title" data-i18n="vc_digital_title">Master more digital skills</p>
+                <p class="vision-desc" data-i18n="vc_digital_desc">Level up my skills in data, analytics, design and tech to stay future-ready.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">Confident communication skills</p>
-                <p class="vision-desc">Speak with clarity, confidence and impact in every situation.</p>
+                <p class="vision-title" data-i18n="vc_community_title">Community project</p>
+                <p class="vision-desc" data-i18n="vc_community_desc">Give back, make an impact, and be part of something meaningful.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">Cook</p>
-                <p class="vision-desc">Enjoy cooking, create healthy meals, and treat my loved ones.</p>
+                <p class="vision-title" data-i18n="vc_comm_title">Confident communication skills</p>
+                <p class="vision-desc" data-i18n="vc_comm_desc">Speak with clarity, confidence and impact in every situation.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">Own car</p>
-                <p class="vision-desc">Financial freedom to own my car and go anywhere I want.</p>
+                <p class="vision-title" data-i18n="vc_cook_title">Strengthen My Faith (Istiqamah)</p>
+                <p class="vision-desc" data-i18n="vc_cook_desc">Strive to become a better Muslim through istiqamah — pray on time, choose kind words, help those in need, and make Selawat Al-Fatih part of my daily routine.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">Family Umrah</p>
-                <p class="vision-desc">Travel together, pray together, and create beautiful memories.</p>
+                <p class="vision-title" data-i18n="vc_car_title">Own car</p>
+                <p class="vision-desc" data-i18n="vc_car_desc">Financial freedom to own my car and go anywhere I want.</p>
             </div>
             <div class="vision-card reveal-box">
-                <p class="vision-title">Learn new languages</p>
-                <p class="vision-desc">Hangul &amp; Mandarin — new language, new world, new opportunities.</p>
+                <p class="vision-title" data-i18n="vc_umrah_title">Family Umrah</p>
+                <p class="vision-desc" data-i18n="vc_umrah_desc">Travel together, pray together, and create beautiful memories.</p>
+            </div>
+            <div class="vision-card reveal-box">
+                <p class="vision-title" data-i18n="vc_lang_title">Learn new languages</p>
+                <p class="vision-desc" data-i18n="vc_lang_desc">Hangul &amp; Mandarin — new language, new world, new opportunities.</p>
             </div>
         </div>
 
-        <div class="vision-banner">FAITH &nbsp;•&nbsp; FOCUS &nbsp;•&nbsp; CONSISTENCY &nbsp;•&nbsp; GRATITUDE = MY FUTURE</div>
+        <div class="vision-banner" data-i18n="vision_banner">FAITH &nbsp;•&nbsp; FOCUS &nbsp;•&nbsp; CONSISTENCY &nbsp;•&nbsp; GRATITUDE = MY FUTURE</div>
     </section>
 
+    <!-- BRAND / SIDE BUSINESS MODAL -->
+    <div id="brandOverlay" class="overlay brand-overlay">
+        <div class="brand-modal">
+            <span class="close-btn brand-close"><i class="fa-solid fa-xmark"></i></span>
+            <span class="brand-leaf l1"><i class="fa-solid fa-leaf"></i></span>
+
+            <p class="brand-modal-title" data-i18n="brand_title">Jerelle — Jelita Aurelle</p>
+            <p class="brand-modal-tagline" data-i18n="brand_tagline">Elegance Meets Confidence</p>
+
+            <div class="brand-image-frame">
+                <img src="images/JERELLE.jpg" alt="Jerelle Jelita Aurelle brand moodboard" class="brand-image zoomable" data-full="images/JERELLE.jpg" title="Click to view full size">
+            </div>
+
+            <p class="brand-modal-desc" data-i18n="brand_desc">A future own-brand for baju kurung, kebaya &amp; modern tradisi — designing timeless, modest pieces that celebrate heritage while empowering today's confident woman.</p>
+
+            <div class="tag-row">
+                <span class="tag" data-i18n="brand_tag1">Own Brand</span>
+                <span class="tag" data-i18n="brand_tag2">Timeless Design</span>
+                <span class="tag" data-i18n="brand_tag3">Empowering Women</span>
+            </div>
+        </div>
+    </div>
+
     <section id="contact">
-        <h2 class="section-heading">Contact</h2>
+        <h2 class="section-heading" data-i18n="contact_heading">Contact</h2>
         <div class="contact-wrapper">
-            <div id="box1" class="contact-box" onclick="copyEmail()">
-                <span id="emailLabel">📧 putryuwaisyah@gmail.com</span>
+            <div id="box1" class="contact-box contact-box-email" onclick="copyEmail()">
+                <i class="fa-solid fa-envelope contact-icon"></i>
+                <span id="emailLabel">putryuwaisyah@gmail.com</span>
             </div>
-            <div id="box2" class="contact-box" onclick="burst(event)">
-                📱 011 5185 4730
+            <div id="box2" class="contact-box contact-box-phone" onclick="burst(event)">
+                <i class="fa-solid fa-phone contact-icon"></i>
+                011 5185 4730
             </div>
-            <a href="https://www.linkedin.com/in/puteri-uwaisyahtul/" target="_blank" id="box3" class="contact-box">
-                🔗 linkedin.com/in/puteri-uwaisyahtul
+            <a href="https://www.linkedin.com/in/puteri-uwaisyahtul/" target="_blank" id="box3" class="contact-box contact-box-linkedin">
+                <i class="fa-brands fa-linkedin contact-icon"></i>
+                linkedin.com/in/puteri-uwaisyahtul
             </a>
         </div>
     </section>
+
+    <!-- FLOATING MUSIC + MAGIC BUTTONS -->
+    <div class="float-btn-stack">
+        <button id="magicBtn" class="float-btn magic-float-btn" title="A little surprise"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+        <button id="musicBtn" class="float-btn music-float-btn" title="Press play for music"><i class="fa-solid fa-music"></i></button>
+    </div>
+
+    <!-- MUSIC PLAYER POPUP -->
+    <div id="musicOverlay" class="overlay music-overlay">
+        <div id="musicModal" class="music-modal">
+            <span id="musicCloseBtn" class="close-btn"><i class="fa-solid fa-xmark"></i></span>
+            <p class="music-modal-title"><i class="fa-solid fa-headphones-simple"></i> Cupid Player</p>
+
+            <div class="vinyl-wrap">
+                <div class="vinyl-disc" id="vinylDisc"></div>
+            </div>
+
+            <p class="music-now-label">Now Playing</p>
+            <div class="music-title-marquee"><span id="musicTrackTitle">Press play to start</span></div>
+
+            <div class="music-progress-row">
+                <span id="musicElapsed">0:00</span>
+                <div class="music-progress-bar"><div class="music-progress-fill" id="musicProgressFill"></div></div>
+                <span id="musicDuration">0:00</span>
+            </div>
+
+            <div class="music-controls-row">
+                <button id="musicPrevBtn" class="music-ctrl-btn" title="Previous"><i class="fa-solid fa-backward-step"></i></button>
+                <button id="musicPlayBtn" class="music-ctrl-btn music-ctrl-main" title="Play / Pause"><i class="fa-solid fa-play"></i></button>
+                <button id="musicNextBtn" class="music-ctrl-btn" title="Next"><i class="fa-solid fa-forward-step"></i></button>
+                <button id="musicRepeatBtn" class="music-ctrl-btn music-repeat-btn" title="Repeat this song"><i class="fa-solid fa-repeat"></i></button>
+            </div>
+
+            <ul class="music-playlist" id="musicPlaylist"></ul>
+        </div>
+    </div>
+
+    <!-- MAGIC POPUP -->
+    <div id="magicOverlay" class="overlay">
+        <div id="magicModal" class="barbie-modal magic-modal">
+            <span id="magicCloseBtn" class="close-btn"><i class="fa-solid fa-xmark"></i></span>
+            <p class="modal-title"><i class="fa-solid fa-wand-magic-sparkles"></i> pssttt meow meow </p>
+            <div class="magic-cat-frame">
+                <img src="images/matchacatmeme.jpg" alt="matcha cat playlist meme" class="magic-cat-img">
+            </div>
+            <p class="magic-message"  data-i18n="magic_message"></p>
+        </div>
+    </div>
+
+    <!-- Persistent, off-screen Spotify player mount — stays alive & keeps playing
+         even after the music popup is closed, since it's never removed/hidden. -->
+    <div id="youtubeMount" style="position:fixed; left:-9999px; top:-9999px;"></div>
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script src="script.js"></script>
 </body>
