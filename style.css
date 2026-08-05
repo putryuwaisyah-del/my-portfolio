@@ -155,9 +155,10 @@ body.dark-mode section:not(#hero) {
 .hero-name {
   font-family: "Press Start 2P", system-ui;
   color: rgb(218, 49, 105);
-  font-size: 45px;
+  font-size: clamp(26px, 8vw, 45px);
   margin: 0 0 16px;
   animation: bounceIn 0.8s ease;
+  line-height: 1.3;
 }
 
 .hero-tagline {
@@ -209,9 +210,10 @@ body.dark-mode section:not(#hero) {
 h1 {
   color: rgb(218, 49, 105);
   font-family: "Press Start 2P", system-ui;
-  font-size: 46px;
+  font-size: clamp(24px, 7vw, 46px);
   margin: 0 0 16px 0;
   text-align: center;
+  line-height: 1.3;
 }
 
 .about-intro {
@@ -228,9 +230,10 @@ h1 {
 .section-heading {
   font-family: "Press Start 2P", system-ui;
   color: rgb(218, 49, 105);
-  font-size: 28px;
+  font-size: clamp(18px, 5vw, 28px);
   margin: 0 0 20px 0;
   text-align: center;
+  line-height: 1.4;
 }
 
 /* ---------- Barbie popup button ---------- */
@@ -2298,17 +2301,17 @@ body.dark-mode .cert-date {
   bottom: 22px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   z-index: 600;
 }
 
 .float-btn {
-  width: 56px;
-  height: 56px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2805,6 +2808,7 @@ body {
 
 #hero {
   position: relative;
+  overflow: hidden;
 }
 
 /* ---------- Scroll progress bar ---------- */
@@ -2934,3 +2938,401 @@ body {
     animation: none !important;
   }
 }
+
+/* =======================================================
+   RESPONSIVE PASS — one polished layout for every device
+   (additive: desktop appearance is untouched at wide widths)
+   ======================================================= */
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Hamburger button (hidden on desktop) ---------- */
+.nav-toggle {
+  display: none;
+  width: 38px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  border-radius: 3px;
+  background: rgb(218, 49, 105);
+  transition: transform 0.35s var(--ease-smooth), opacity 0.25s var(--ease-smooth);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.nav-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 15, 20, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 8;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s var(--ease-smooth), visibility 0s linear 0.35s;
+}
+
+.nav-scrim.active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s var(--ease-smooth), visibility 0s linear 0s;
+}
+
+/* ---------- Tablet & below: collapse nav into a slide-in panel ---------- */
+@media (max-width: 980px) {
+  #navbar {
+    padding: 12px 18px;
+    flex-wrap: nowrap;
+  }
+
+  .nav-toggle {
+    display: flex;
+    order: 3;
+  }
+
+  .nav-controls {
+    gap: 10px;
+  }
+
+  #navbar .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    height: 100dvh;
+    width: min(78vw, 320px);
+    background: rgba(255, 245, 249, 0.98);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 90px 28px 40px;
+    z-index: 9;
+    transform: translateX(100%);
+    transition: transform 0.4s var(--ease-smooth);
+    box-shadow: -12px 0 40px rgba(120, 70, 90, 0.25);
+    overflow-y: auto;
+  }
+
+  #navbar .nav-links.open {
+    transform: translateX(0);
+  }
+
+  #navbar .nav-links a {
+    width: 100%;
+    padding: 12px 4px;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(218, 49, 105, 0.12);
+  }
+
+  #navbar .nav-links a::after {
+    display: none;
+  }
+
+  body.dark-mode #navbar .nav-links {
+    background: rgba(24, 16, 22, 0.98);
+  }
+}
+
+/* ---------- General spacing & type tightening ---------- */
+@media (max-width: 768px) {
+  #hero {
+    padding: 120px 20px 70px;
+  }
+
+  section {
+    padding: 40px 18px;
+  }
+
+  section:not(#hero) {
+    border-radius: 20px;
+    margin: 22px auto;
+  }
+
+  .hero-tagline,
+  .about-intro {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .flip-grid,
+  .badge-grid,
+  .cert-grid,
+  .vision-grid {
+    gap: 14px;
+  }
+
+  .flip-card {
+    height: 260px;
+  }
+
+  .float-btn-stack {
+    right: 14px;
+    bottom: 16px;
+    gap: 10px;
+  }
+
+  .float-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+
+  .contact-box {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .contact-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .barbie-modal,
+  .brand-modal {
+    padding: 1.5rem;
+    max-height: 86vh;
+  }
+
+  .lang-switch {
+    transform: scale(0.92);
+  }
+}
+
+@media (max-width: 480px) {
+  #navbar .logo {
+    font-size: 16px;
+  }
+
+  .hero-greeting {
+    font-size: 12px;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .timeline {
+    padding-left: 20px;
+  }
+
+  .timeline-dot {
+    left: -29px;
+  }
+
+  .skill-pill {
+    font-size: 12.5px;
+    padding: 7px 14px;
+  }
+}
+
+/* Short/landscape phones: don't force a tall empty hero */
+@media (max-width: 900px) and (max-height: 480px) and (orientation: landscape) {
+  #hero {
+    padding: 90px 20px 40px;
+  }
+}
+
+/* ---------- Touch devices: tap-to-flip project cards ---------- */
+@media (hover: none) {
+  .flip-card:hover .flip-inner {
+    transform: none;
+  }
+
+  .flip-card.flipped .flip-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card {
+    cursor: pointer;
+  }
+}
+
+/* Comfortable minimum touch targets on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .btn,
+  .barbie-btn,
+  .cert-btn,
+  .lang-btn,
+  .theme-toggle,
+  .nav-toggle,
+  .float-btn,
+  .skill-pill,
+  #navbar .nav-links a {
+    min-height: 40px;
+  }
+}
+
+/* =======================================================
+   NAVIGATION UPGRADE — smart-hide top bar + section jumper
+   ======================================================= */
+
+/* ---------- Smart nav: hides on scroll-down, reappears on scroll-up ---------- */
+#navbar {
+  transition: transform 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth);
+}
+
+#navbar.nav-hidden {
+  transform: translateY(-100%);
+}
+
+/* ---------- Floating Prev / Next section navigator ---------- */
+.section-nav {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 600;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(218, 49, 105, 0.25);
+  border-radius: 22px;
+  padding: 8px 5px;
+  box-shadow: 0 10px 26px rgba(120, 70, 90, 0.16);
+}
+
+.section-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: rgb(218, 49, 105);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s var(--ease-smooth), color 0.25s var(--ease-smooth), transform 0.25s var(--ease-bounce);
+}
+
+.section-nav-btn--edge {
+  width: 24px;
+  height: 24px;
+  font-size: 10px;
+  color: rgba(218, 49, 105, 0.45);
+}
+
+.section-nav-btn--edge:hover:not(:disabled) {
+  color: rgb(218, 49, 105);
+  background: rgba(218, 49, 105, 0.12);
+  transform: none;
+}
+
+.section-nav-btn:hover:not(:disabled) {
+  background: rgb(218, 49, 105);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.section-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.section-nav-counter {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: rgb(138, 61, 90);
+  letter-spacing: 0.3px;
+  writing-mode: horizontal-tb;
+  padding: 2px 0;
+}
+
+body.dark-mode .section-nav {
+  background: rgba(28, 20, 26, 0.85);
+  border-color: rgba(255, 130, 178, 0.3);
+}
+
+body.dark-mode .section-nav-counter {
+  color: rgb(230, 200, 210);
+}
+
+/* Give way to the section-nav on narrower screens so it never
+   overlaps the frosted section panels or floating music/magic btns */
+@media (max-width: 640px) {
+  .section-nav {
+    left: 8px;
+    padding: 6px 4px;
+    gap: 3px;
+  }
+
+  .section-nav-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .section-nav-btn--edge {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+
+  .section-nav-counter {
+    font-size: 8.5px;
+  }
+}
+
+/* Hide the jumper on very short viewports where it would crowd content */
+@media (max-height: 480px) {
+  .section-nav {
+    display: none;
+  }
+}
+
+/* =======================================================
+   POLISH PASS — organized, professional finishing touches
+   ======================================================= */
+
+/* Themed text selection + focus ring, small but noticeable polish */
+::selection {
+  background: rgba(218, 49, 105, 0.25);
+  color: rgb(74, 27, 40);
+}
+
+a:focus-visible,
+button:focus-visible,
+.skill-pill:focus-visible,
+.flip-card:focus-visible {
+  outline: 2px solid rgb(218, 49, 105);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+

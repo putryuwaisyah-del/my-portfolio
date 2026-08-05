@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#da3169">
     <title>Putely - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +17,7 @@
 
     <nav id="navbar">
         <a href="#hero" class="logo" title="Back to top">Putely.Portfolio</a>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <a href="#about" data-i18n="nav_about">About</a>
             <a href="#skills" data-i18n="nav_skills">Skills</a>
             <a href="#education" data-i18n="nav_education">Education</a>
@@ -35,8 +37,12 @@
             <button id="themeToggle" class="theme-toggle" title="Toggle dark mode">
                 <i class="fa-solid fa-moon theme-icon"></i>
             </button>
+            <button id="navToggle" class="nav-toggle" title="Menu" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </nav>
+    <div class="nav-scrim" id="navScrim"></div>
 
     <section id="hero">
         <p class="hero-greeting" data-i18n="hero_greeting">Hello, I'm</p>
@@ -749,6 +755,23 @@
             </a>
         </div>
     </section>
+
+    <!-- SECTION PREV/NEXT NAVIGATOR -->
+    <div class="section-nav" id="sectionNav">
+        <button id="sectionTop" class="section-nav-btn section-nav-btn--edge" title="Scroll to top" aria-label="Scroll to the very top">
+            <i class="fa-solid fa-angles-up"></i>
+        </button>
+        <button id="sectionPrev" class="section-nav-btn" title="Previous section" aria-label="Go to previous section">
+            <i class="fa-solid fa-chevron-up"></i>
+        </button>
+        <span id="sectionCounter" class="section-nav-counter">1/12</span>
+        <button id="sectionNext" class="section-nav-btn" title="Next section" aria-label="Go to next section">
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <button id="sectionBottom" class="section-nav-btn section-nav-btn--edge" title="Scroll to bottom" aria-label="Scroll to the very bottom">
+            <i class="fa-solid fa-angles-down"></i>
+        </button>
+    </div>
 
     <!-- FLOATING MUSIC + MAGIC BUTTONS -->
     <div class="float-btn-stack">

@@ -1134,3 +1134,298 @@ window.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// =======================================================
+// UPGRADE PASS — smoother transitions & captivating motion
+// (additive only: does not alter any existing text/logic)
+// =======================================================
+window.addEventListener("DOMContentLoaded", () => {
+
+    // ---------- Scroll progress bar ----------
+    const progressBar = document.createElement("div");
+    progressBar.id = "scrollProgress";
+    document.body.appendChild(progressBar);
+
+    const navbarEl = document.getElementById("navbar");
+
+    function updateOnScroll() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progressBar.style.width = pct + "%";
+
+        if (navbarEl) {
+            navbarEl.classList.toggle("scrolled", scrollTop > 10);
+        }
+    }
+    updateOnScroll();
+    window.addEventListener("scroll", updateOnScroll, { passive: true });
+
+    // ---------- Active nav link highlighting ----------
+    const navLinks = Array.from(document.querySelectorAll("#navbar .nav-links a"));
+    const sectionMap = navLinks
+        .map((link) => {
+            const id = link.getAttribute("href");
+            if (!id || !id.startsWith("#")) return null;
+            const section = document.querySelector(id);
+            return section ? { link, section } : null;
+        })
+        .filter(Boolean);
+
+    if (sectionMap.length) {
+        const navObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    const match = sectionMap.find((m) => m.section === entry.target);
+                    if (!match) return;
+                    if (entry.isIntersecting) {
+                        navLinks.forEach((l) => l.classList.remove("active-link"));
+                        match.link.classList.add("active-link");
+                    }
+                });
+            },
+            { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+        );
+        sectionMap.forEach((m) => navObserver.observe(m.section));
+    }
+
+    // ---------- Staggered reveal delays ----------
+    // Groups reveal-boxes by their immediate parent so cards inside the
+    // same grid cascade in one after another instead of popping together.
+    const revealGroups = new Map();
+    document.querySelectorAll(".reveal-box").forEach((box) => {
+        const parent = box.parentElement;
+        if (!revealGroups.has(parent)) revealGroups.set(parent, []);
+        revealGroups.get(parent).push(box);
+    });
+    revealGroups.forEach((boxes) => {
+        boxes.forEach((box, i) => {
+            const delay = Math.min(i, 6) * 0.08;
+            box.style.setProperty("--reveal-delay", delay + "s");
+        });
+    });
+
+    // ---------- Ripple click feedback ----------
+    const rippleSelector =
+        ".btn, .barbie-btn, .overview-btn, .cert-btn, .contact-box, .lang-btn, " +
+        ".theme-toggle, .float-btn, .music-ctrl-btn, .slide-nav, .accordion-header";
+
+    document.addEventListener("click", (e) => {
+        const target = e.target.closest(rippleSelector);
+        if (!target) return;
+
+        const rect = target.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height) * 1.4;
+        const ripple = document.createElement("span");
+        ripple.className = "ripple";
+        if (getComputedStyle(target).color) {
+            // Use a tinted ripple on light backgrounds, white on filled ones
+            const bg = getComputedStyle(target).backgroundColor;
+            const isLight = bg === "rgba(0, 0, 0, 0)" || bg === "transparent" || bg.includes("255, 255, 255");
+            if (isLight) ripple.classList.add("ripple-dark");
+        }
+        ripple.style.width = ripple.style.height = size + "px";
+        ripple.style.left = e.clientX - rect.left - size / 2 + "px";
+        ripple.style.top = e.clientY - rect.top - size / 2 + "px";
+
+        const prevPosition = getComputedStyle(target).position;
+        if (prevPosition === "static") target.style.position = "relative";
+        target.classList.add("ripple-wrap");
+        target.appendChild(ripple);
+        ripple.addEventListener("animationend", () => {
+            ripple.remove();
+            target.classList.remove("ripple-wrap");
+        });
+    });
+
+    // ---------- Cursor glow in hero (desktop / hover-capable only) ----------
+    const hero = document.getElementById("hero");
+    if (hero && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        const glow = document.createElement("div");
+        glow.className = "cursor-glow";
+        hero.prepend(glow);
+
+        hero.addEventListener("mousemove", (e) => {
+            const rect = hero.getBoundingClientRect();
+            glow.style.setProperty("--x", e.clientX - rect.left + "px");
+            glow.style.setProperty("--y", e.clientY - rect.top + "px");
+            glow.classList.add("active");
+        });
+        hero.addEventListener("mouseleave", () => glow.classList.remove("active"));
+    }
+});
+
+// =======================================================
+// RESPONSIVE PASS — mobile nav + touch-friendly interactions
+// (additive only: does not alter any existing text/logic)
+// =======================================================
+window.addEventListener("DOMContentLoaded", () => {
+
+    // ---------- Mobile hamburger nav ----------
+    const navToggle = document.getElementById("navToggle");
+    const navLinksEl = document.getElementById("navLinks");
+    const navScrim = document.getElementById("navScrim");
+
+    function closeMobileNav() {
+        if (!navLinksEl) return;
+        navLinksEl.classList.remove("open");
+        navToggle && navToggle.setAttribute("aria-expanded", "false");
+        navScrim && navScrim.classList.remove("active");
+        document.body.style.overflow = "";
+    }
+
+    function openMobileNav() {
+        if (!navLinksEl) return;
+        navLinksEl.classList.add("open");
+        navToggle && navToggle.setAttribute("aria-expanded", "true");
+        navScrim && navScrim.classList.add("active");
+        document.body.style.overflow = "hidden";
+    }
+
+    if (navToggle && navLinksEl) {
+        navToggle.addEventListener("click", () => {
+            const isOpen = navLinksEl.classList.contains("open");
+            isOpen ? closeMobileNav() : openMobileNav();
+        });
+
+        navLinksEl.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMobileNav);
+        });
+
+        navScrim && navScrim.addEventListener("click", closeMobileNav);
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeMobileNav();
+        });
+
+        // Collapse the mobile panel automatically if the viewport is
+        // resized back up to desktop width while it's open.
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 980) closeMobileNav();
+        });
+    }
+
+    // ---------- Tap-to-flip project cards on touch devices ----------
+    if (window.matchMedia("(hover: none)").matches) {
+        document.querySelectorAll(".flip-card").forEach((card) => {
+            card.addEventListener("click", (e) => {
+                // Let real links/buttons inside the card back face work normally
+                if (e.target.closest("a, button")) return;
+                card.classList.toggle("flipped");
+            });
+        });
+    }
+});
+
+// =======================================================
+// NAVIGATION UPGRADE — smart-hide top bar + section jumper
+// (additive only: does not alter any existing text/logic)
+// =======================================================
+window.addEventListener("DOMContentLoaded", () => {
+
+    // ---------- Smart nav: hide on scroll-down, show on scroll-up ----------
+    const navbarSmart = document.getElementById("navbar");
+    const navLinksSmart = document.getElementById("navLinks");
+
+    if (navbarSmart) {
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        function handleSmartNav() {
+            const currentY = Math.max(window.scrollY, 0);
+            const menuOpen = navLinksSmart && navLinksSmart.classList.contains("open");
+            const navHeight = navbarSmart.offsetHeight;
+
+            if (menuOpen || currentY < navHeight * 1.2) {
+                navbarSmart.classList.remove("nav-hidden");
+            } else if (currentY > lastY + 4) {
+                navbarSmart.classList.add("nav-hidden");
+            } else if (currentY < lastY - 4) {
+                navbarSmart.classList.remove("nav-hidden");
+            }
+            lastY = currentY;
+            ticking = false;
+        }
+
+        window.addEventListener(
+            "scroll",
+            () => {
+                if (!ticking) {
+                    requestAnimationFrame(handleSmartNav);
+                    ticking = true;
+                }
+            },
+            { passive: true }
+        );
+    }
+
+    // ---------- Prev / Next section navigator ----------
+    const sections = Array.from(document.querySelectorAll("section[id]"));
+    const prevBtn = document.getElementById("sectionPrev");
+    const nextBtn = document.getElementById("sectionNext");
+    const topBtn = document.getElementById("sectionTop");
+    const bottomBtn = document.getElementById("sectionBottom");
+    const counterEl = document.getElementById("sectionCounter");
+
+    if (sections.length && prevBtn && nextBtn && counterEl) {
+        counterEl.textContent = "1/" + sections.length;
+
+        function getNavOffset() {
+            const nb = document.getElementById("navbar");
+            return nb ? nb.offsetHeight + 10 : 10;
+        }
+
+        function currentSectionIndex() {
+            const refLine = getNavOffset() + 40;
+            let idx = 0;
+            for (let i = 0; i < sections.length; i++) {
+                const rect = sections[i].getBoundingClientRect();
+                if (rect.top <= refLine) idx = i;
+            }
+            return idx;
+        }
+
+        function goToSection(index) {
+            if (index < 0 || index >= sections.length) return;
+            const target = sections[index];
+            const top = target.getBoundingClientRect().top + window.scrollY - getNavOffset();
+            window.scrollTo({ top, behavior: "smooth" });
+        }
+
+        function updateSectionNavUI() {
+            const idx = currentSectionIndex();
+            counterEl.textContent = idx + 1 + "/" + sections.length;
+            prevBtn.disabled = idx <= 0;
+            nextBtn.disabled = idx >= sections.length - 1;
+            if (topBtn) topBtn.disabled = idx <= 0;
+            if (bottomBtn) bottomBtn.disabled = idx >= sections.length - 1;
+        }
+
+        prevBtn.addEventListener("click", () => goToSection(currentSectionIndex() - 1));
+        nextBtn.addEventListener("click", () => goToSection(currentSectionIndex() + 1));
+
+        topBtn && topBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+        bottomBtn && bottomBtn.addEventListener("click", () => {
+            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
+        });
+
+        let secTicking = false;
+        window.addEventListener(
+            "scroll",
+            () => {
+                if (!secTicking) {
+                    requestAnimationFrame(() => {
+                        updateSectionNavUI();
+                        secTicking = false;
+                    });
+                    secTicking = true;
+                }
+            },
+            { passive: true }
+        );
+        updateSectionNavUI();
+    }
+});
