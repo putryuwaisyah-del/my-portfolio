@@ -998,13 +998,16 @@ function formatMusicTime(ms) {
 
 function updateMusicUI(position, duration, playing) {
     const fill = document.getElementById("musicProgressFill");
+    const thumb = document.getElementById("musicProgressThumb");
     const elapsed = document.getElementById("musicElapsed");
     const dur = document.getElementById("musicDuration");
     const vinyl = document.getElementById("vinylDisc");
     const playBtn = document.getElementById("musicPlayBtn");
     const floatBtn = document.getElementById("musicBtn");
 
-    if (fill) fill.style.width = (duration > 0 ? Math.min(100, (position / duration) * 100) : 0) + "%";
+    const pct = duration > 0 ? Math.min(100, Math.max(0, (position / duration) * 100)) : 0;
+    if (fill) fill.style.width = pct + "%";
+    if (thumb) thumb.style.left = pct + "%";
     if (elapsed) elapsed.textContent = formatMusicTime(position);
     if (dur) dur.textContent = formatMusicTime(duration);
     if (vinyl) vinyl.classList.toggle("spinning", playing);
@@ -1112,6 +1115,66 @@ window.addEventListener("DOMContentLoaded", () => {
     if (prevBtn) prevBtn.addEventListener("click", prevMusicTrack);
     if (nextBtn) nextBtn.addEventListener("click", nextMusicTrack);
     if (repeatBtn) repeatBtn.addEventListener("click", toggleMusicRepeat);
+
+    // ---- Seek: click or drag the progress bar to jump to any point ----
+    const progressBar = document.getElementById("musicProgressBar");
+    if (progressBar) {
+        let dragging = false;
+
+        function fractionFromEvent(e) {
+            const rect = progressBar.getBoundingClientRect();
+            const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+            return Math.min(1, Math.max(0, x / rect.width));
+        }
+
+        function previewSeek(fraction) {
+            if (!ytPlayer || typeof ytPlayer.getDuration !== "function") return;
+            const duration = ytPlayer.getDuration() || 0;
+            updateMusicUI(fraction * duration * 1000, duration * 1000, isMusicPlaying);
+        }
+
+        function commitSeek(fraction) {
+            if (!ytPlayer || typeof ytPlayer.seekTo !== "function") return;
+            const duration = ytPlayer.getDuration() || 0;
+            if (duration <= 0) return;
+            ytPlayer.seekTo(fraction * duration, true);
+            updateMusicUI(fraction * duration * 1000, duration * 1000, isMusicPlaying);
+        }
+
+        function startDrag(e) {
+            if (!ytPlayer || !hasUserStartedPlayback) return;
+            dragging = true;
+            progressBar.classList.add("dragging");
+            previewSeek(fractionFromEvent(e));
+            e.preventDefault();
+        }
+
+        function moveDrag(e) {
+            if (!dragging) return;
+            previewSeek(fractionFromEvent(e));
+        }
+
+        function endDrag(e) {
+            if (!dragging) return;
+            dragging = false;
+            progressBar.classList.remove("dragging");
+            commitSeek(fractionFromEvent(e));
+        }
+
+        progressBar.addEventListener("mousedown", startDrag);
+        window.addEventListener("mousemove", moveDrag);
+        window.addEventListener("mouseup", endDrag);
+
+        progressBar.addEventListener("touchstart", startDrag, { passive: false });
+        window.addEventListener("touchmove", moveDrag, { passive: true });
+        window.addEventListener("touchend", endDrag);
+
+        // A plain click (no drag) still seeks to that point.
+        progressBar.addEventListener("click", (e) => {
+            if (!ytPlayer || !hasUserStartedPlayback) return;
+            commitSeek(fractionFromEvent(e));
+        });
+    }
 
     // ---- Magic popup ----
     const magicBtn = document.getElementById("magicBtn");
@@ -1318,114 +1381,32 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // =======================================================
-// NAVIGATION UPGRADE — smart-hide top bar + section jumper
-// (additive only: does not alter any existing text/logic)
+// BACK-TO-TOP BUTTON — fades in once you've scrolled down a
+// bit, fades out again near the top. Sits above the magic/music
+// float buttons in the same stack.
 // =======================================================
 window.addEventListener("DOMContentLoaded", () => {
+    const topBtn = document.getElementById("backToTopBtn");
+    if (!topBtn) return;
 
-    // ---------- Smart nav: hide on scroll-down, show on scroll-up ----------
-    const navbarSmart = document.getElementById("navbar");
-    const navLinksSmart = document.getElementById("navLinks");
+    topBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
-    if (navbarSmart) {
-        let lastY = window.scrollY;
-        let ticking = false;
-
-        function handleSmartNav() {
-            const currentY = Math.max(window.scrollY, 0);
-            const menuOpen = navLinksSmart && navLinksSmart.classList.contains("open");
-            const navHeight = navbarSmart.offsetHeight;
-
-            if (menuOpen || currentY < navHeight * 1.2) {
-                navbarSmart.classList.remove("nav-hidden");
-            } else if (currentY > lastY + 4) {
-                navbarSmart.classList.add("nav-hidden");
-            } else if (currentY < lastY - 4) {
-                navbarSmart.classList.remove("nav-hidden");
-            }
-            lastY = currentY;
-            ticking = false;
-        }
-
-        window.addEventListener(
-            "scroll",
-            () => {
-                if (!ticking) {
-                    requestAnimationFrame(handleSmartNav);
-                    ticking = true;
-                }
-            },
-            { passive: true }
-        );
+    let ticking = false;
+    function toggleTopBtn() {
+        topBtn.classList.toggle("visible", window.scrollY > window.innerHeight * 0.6);
+        ticking = false;
     }
-
-    // ---------- Prev / Next section navigator ----------
-    const sections = Array.from(document.querySelectorAll("section[id]"));
-    const prevBtn = document.getElementById("sectionPrev");
-    const nextBtn = document.getElementById("sectionNext");
-    const topBtn = document.getElementById("sectionTop");
-    const bottomBtn = document.getElementById("sectionBottom");
-    const counterEl = document.getElementById("sectionCounter");
-
-    if (sections.length && prevBtn && nextBtn && counterEl) {
-        counterEl.textContent = "1/" + sections.length;
-
-        function getNavOffset() {
-            const nb = document.getElementById("navbar");
-            return nb ? nb.offsetHeight + 10 : 10;
-        }
-
-        function currentSectionIndex() {
-            const refLine = getNavOffset() + 40;
-            let idx = 0;
-            for (let i = 0; i < sections.length; i++) {
-                const rect = sections[i].getBoundingClientRect();
-                if (rect.top <= refLine) idx = i;
+    window.addEventListener(
+        "scroll",
+        () => {
+            if (!ticking) {
+                requestAnimationFrame(toggleTopBtn);
+                ticking = true;
             }
-            return idx;
-        }
-
-        function goToSection(index) {
-            if (index < 0 || index >= sections.length) return;
-            const target = sections[index];
-            const top = target.getBoundingClientRect().top + window.scrollY - getNavOffset();
-            window.scrollTo({ top, behavior: "smooth" });
-        }
-
-        function updateSectionNavUI() {
-            const idx = currentSectionIndex();
-            counterEl.textContent = idx + 1 + "/" + sections.length;
-            prevBtn.disabled = idx <= 0;
-            nextBtn.disabled = idx >= sections.length - 1;
-            if (topBtn) topBtn.disabled = idx <= 0;
-            if (bottomBtn) bottomBtn.disabled = idx >= sections.length - 1;
-        }
-
-        prevBtn.addEventListener("click", () => goToSection(currentSectionIndex() - 1));
-        nextBtn.addEventListener("click", () => goToSection(currentSectionIndex() + 1));
-
-        topBtn && topBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-
-        bottomBtn && bottomBtn.addEventListener("click", () => {
-            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "smooth" });
-        });
-
-        let secTicking = false;
-        window.addEventListener(
-            "scroll",
-            () => {
-                if (!secTicking) {
-                    requestAnimationFrame(() => {
-                        updateSectionNavUI();
-                        secTicking = false;
-                    });
-                    secTicking = true;
-                }
-            },
-            { passive: true }
-        );
-        updateSectionNavUI();
-    }
+        },
+        { passive: true }
+    );
+    toggleTopBtn();
 });
