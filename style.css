@@ -113,12 +113,8 @@ body.dark-mode section:not(#hero) {
   color: rgb(218, 49, 105);
   font-size: 18px;
   text-decoration: none;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-#navbar .logo:hover {
-  opacity: 0.75;
+  cursor: default;
+  user-select: none;
 }
 
 #navbar .nav-links {

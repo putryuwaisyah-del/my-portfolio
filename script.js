@@ -141,7 +141,7 @@ function burst(e) {
 const translations = {
     en: {
         magic_message: "Welcome! Before you start exploring, feel free to press the music button and enjoy my favourite playlist while you look through my portfolio.",
-        nav_about: "About", nav_skills: "Skills", nav_education: "Education",
+        nav_home: "Home", nav_about: "About", nav_skills: "Skills", nav_education: "Education",
         nav_experience: "Experience", nav_projects: "Projects", nav_volunteering: "Volunteering",
         nav_vision: "Vision Board", nav_contact: "Contact",
         hero_greeting: "Hello, I'm",
@@ -306,7 +306,7 @@ const translations = {
     },
     ms: {
         magic_message: "Selamat datang! Sebelum anda mula meneroka, anda boleh menekan butang muzik dan menikmati senarai lagu kegemaran saya sambil menelusuri portfolio ini.",
-        nav_about: "Tentang", nav_skills: "Kemahiran", nav_education: "Pendidikan",
+        nav_home: "Utama", nav_about: "Tentang", nav_skills: "Kemahiran", nav_education: "Pendidikan",
         nav_experience: "Pengalaman", nav_projects: "Projek", nav_volunteering: "Kesukarelawanan",
         nav_vision: "Papan Visi", nav_contact: "Hubungi",
         hero_greeting: "Salam, saya",
@@ -471,7 +471,7 @@ const translations = {
     },
     ja: {
         magic_message: "ようこそ！探索を始める前に、音楽ボタンを押して私のお気に入りの曲を聴きながら、このポートフォリオをご覧ください。",
-        nav_about: "About", nav_skills: "スキル", nav_education: "学歴",
+        nav_home: "ホーム", nav_about: "About", nav_skills: "スキル", nav_education: "学歴",
         nav_experience: "職歴", nav_projects: "プロジェクト", nav_volunteering: "ボランティア",
         nav_vision: "ビジョンボード", nav_contact: "お問い合わせ",
         hero_greeting: "こんにちは、",
