@@ -386,6 +386,7 @@ const translations = {
     cert13_title: "SUKOL Certificate - Mobile Legends: Bang Bang",
     cert14_title: "Hari Komuniti PLUS Volunteer Certificate",
     cert15_title: "Eksplorasi Bahasa Volunteer Certificate",
+    cert16_title: "KADA Certificate",
     cert_view_btn: "<i class='fa-solid fa-eye'></i> View Certificate",
     proj4_front_title: "Hotel Reservation System",
     proj4_front_sub: "ROOMA Hotel Database",
